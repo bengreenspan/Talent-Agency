@@ -2,6 +2,8 @@
 const path = require('path');
 const express = require('express');
 const app = express();
+app.use(express.json());
+
 
 const { models: {Talent, Client, ClientTalent}, syncAndSeed } = require('./db/db')
 
@@ -14,23 +16,76 @@ app.use('/dist', static(path.join(__dirname, 'dist')));
 
 app.get('/', (req, res, next)=> res.sendFile(path.join(__dirname, 'index.html')));
 
-app.get('/api/clients', async(req, res, next)=> {
+
+app.get('/api/talents', async(req, res, next)=> {
   try {
-    res.send(await Client.findAll());
+    res.send(await Talent.findAll({
+      include: [ClientTalent]
+    }));
   }
   catch(ex){
     next(ex);
   }
 });
 
-app.get('/api/talents', async(req, res, next)=> {
+app.get('/api/clients', async(req, res, next)=> {
   try {
-    res.send(await Talent.findAll());
+    res.send(await Client.findAll({
+      include: [ClientTalent]
+    }));
   }
   catch(ex){
     next(ex);
   }
 });
+
+app.get('/api/ClientTalent', async(req, res, next)=> {
+  try {
+    res.send(await Client.findAll({
+      include: [ClientTalent]
+    }));
+  }
+  catch(ex){
+    next(ex);
+  }
+});
+
+
+
+app.put('/api/talents/:id', async(req, res, next)=> {
+  try {
+    res.send(await Talent.findAll({
+      include: [ClientTalent]
+    }));
+  }
+  catch(ex){
+    next(ex);
+  }
+});
+
+
+app.post('/api/ClientTalent', async(req, res, next)=> {
+  try {
+    res.status(201).send(
+      await ClientTalent.create(req.body));
+  }
+  catch(ex){
+    next(ex);
+  }
+});
+
+
+app.delete('/api/ClientTalent/:id', async(req, res, next)=> {
+  try {
+    const clienttalent = await ClientTalent.findByPk(req.params.id);
+    await clienttalent.destroy();
+    res.sendStatus(204);
+    }
+  catch(ex){
+    next(ex);
+  };
+});
+
 
 const init = async()=> {
   try {

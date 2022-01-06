@@ -1,5 +1,4 @@
 import React, { Component }from "react";
-import store from './store'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -22,9 +21,5 @@ const Clients = ({clients}) => {
         )
         }
 
-        const mapStateToProps = (state) => {
-            return state;
-        }
-        
-        export default connect(mapStateToProps)(Clients);
-        
+    const mapStateToProps = ({clients, clientTalent}) => ({clients, clientTalent}) 
+    export default connect(mapStateToProps)(Clients);

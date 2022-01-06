@@ -1,10 +1,8 @@
-import React, { Component }from "react";
-import store from './store'
+import React from "react";
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-const Talents = ({talents}) => {
-
+const Talents = ({talents, clientTalent})=> {
         return (
             <ul>
             {
@@ -16,13 +14,13 @@ const Talents = ({talents}) => {
                        </Link>
                     </li>
                 )
-            })
-        }    
+            }          
+                )  
+        }  
         </ul>
         )
         }
-const mapStateToProps = (state) => {
-    return state;
-}
+
+const mapStateToProps = ({talents, clientTalent}) => ({talents, clientTalent})
 
 export default connect(mapStateToProps)(Talents);

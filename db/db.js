@@ -42,8 +42,18 @@ const syncAndSeed= async () => {
 await Promise.all([
   ClientTalent.create({ clientId: Scooby.id, talentId: Searching.id}),
   ClientTalent.create({ clientId: Scooby.id, talentId: Scared.id}),
-  ClientTalent.create({ clientId: Shaggy.id, talentId: Wirefraud.id}),
+  ClientTalent.create({ clientId: Scooby.id, talentId: Wirefraud.id}),
   ClientTalent.create({ clientId: Shaggy.id, talentId: Leadership.id}),
+  ClientTalent.create({ clientId: Shaggy.id, talentId: Searching.id}),
+  ClientTalent.create({ clientId: Shaggy.id, talentId: Scared.id}),
+  ClientTalent.create({ clientId: Velma.id, talentId: Chasing.id}),
+  ClientTalent.create({ clientId: Velma.id, talentId: Leadership.id}),
+  ClientTalent.create({ clientId: Velma.id, talentId: Searching.id}),
+  ClientTalent.create({ clientId: Daphne.id, talentId: Eating.id}),
+  ClientTalent.create({ clientId: Daphne.id, talentId: Wirefraud.id}),
+  ClientTalent.create({ clientId: Freddy.id, talentId: Chasing.id}),
+  ClientTalent.create({ clientId: Freddy.id, talentId: Eating.id}),
+
 ]);
     }
 catch(ex) {

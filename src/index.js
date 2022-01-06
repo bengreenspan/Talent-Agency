@@ -5,7 +5,7 @@ import Clients from './Clients';
 import Talents from './Talents';
 import Client from './Client';
 import Talent from './Talent';
-import store, { loaded, loadTalents, loadClients, setView } from './store';
+import store, { loadTalents, loadClients, loadClientTalent } from './store';
 import {Provider, connect} from 'react-redux';
 import {HashRouter, Route, Link} from 'react-router-dom';
 
@@ -17,18 +17,9 @@ class _App extends Component{
   }
 
 async componentDidMount(){
-this.props.load();
-window.addEventListener('hashchange', ()=> {
-  this.props.setView(window.location.hash.slice(1))
-});
-this.props.setView(window.location.hash.slice(1))
 }
 
   render(){
-    const { loading, view } = this.props;
-    if(loading){
-      return '....loading';
-    }
     return (
       <HashRouter>
       <ul>
@@ -37,34 +28,27 @@ this.props.setView(window.location.hash.slice(1))
        <Route component= {Clients} path='/' exact />
           <h2>Talents</h2>
           <Route component= {Talent} path='/talents/:id' exact />
-     
           <Route component= {Talents} path='/' exact />
-        
-
       </ul>
-    
       </HashRouter>
       
     );
   }
 }
 
-const mapStateToProps = (state) => (state);
+const mapStateToProps = ({clients, talents}) => ({clients, talents});
 
 const mapDispatchToProps = (dispatch) => { 
   return {
-    load: async()=> {
-    const clients = (await axios.get('/api/clients')).data;
-    const talents = (await axios.get('/api/talents')).data;
-    dispatch(loaded());
-    dispatch(loadTalents(talents));
-    dispatch(loadClients(clients));
-  },
-  setView: function (view) {
-    dispatch(setView(view));
+    loadClients: () => dispatch(loadClients()),
+    loadTalents: () => dispatch(loadTalents()),
+    loadClientTalent: () => dispatch(loadClientTalent()),
+    // load: async()=> {
+    // dispatch(loadTalents(Talents));
+    // dispatch(loadClients(Clients));
+    // dispatch(loadClientTalent(clientTalent));
   }
-  }
-};
+  };
 
 
 const App = connect(mapStateToProps, mapDispatchToProps)(_App)
