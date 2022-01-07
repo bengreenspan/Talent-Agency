@@ -1,10 +1,20 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { deleteTalent, createClientTalent} from './store';
+import { deleteClientTalent, createClientTalent} from './store';
 import {Link} from 'react-router-dom';
 
+// //this needs to be a react component
+// onSubmit = (ev) =>{
+//     ev.preventDefault();
+//     console.log(this.state) 
+//     // this is how you do some state bullshit
+// }
 
-const Client = ({ clients, match: {params: {id}}, deleteTalent, ClientTalent, destroy}) => {
+// onChange = (ev) =>{
+//     this.setState({newTalent});
+// }
+
+const Client = ({ clients, match: {params: {id}}, deleteClientTalent, ClientTalent, destroy}) => {
     id = id *1;
     const client = clients.find(client => client.id === id) // you can put this in mapstateto
     if(!client){
@@ -15,12 +25,10 @@ return (
             <div>
                 {console.log(client)} 
             <h1> {client.name}</h1>
-            <h1> {client.ClientTalent.length}</h1>
-             <button onClick={()=>deleteTalent(ClientTalent)}>X</button>
+             <button onClick={()=>deleteClientTalent(ClientTalent)}>X</button>
             <h2>  has the following skills </h2>
 
-            <button onClick={()=>createClientTalent(Math.random())}>X</button>
-        
+       
         <Link to={'/'}>back to home page</Link>
         </div>
 
@@ -33,8 +41,8 @@ const mapDispatchToProps = (dispatch, {history}) => {
         createClientTalent: (name)=> {
          dispatch(createClientTalent(name));
         },
-        deleteTalent: (ClientTalent)=> {
-         dispatch(deleteTalent(ClientTalent, {history}));
+        deleteClientTalent: (ClientTalent)=> {
+         dispatch(alent(ClientTalent, {history}));
         },
     }
 }

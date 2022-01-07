@@ -11,12 +11,9 @@ import {HashRouter, Route, Link} from 'react-router-dom';
 
 
 class _App extends Component{
-  constructor(){
-    super();
 
-  }
-
-async componentDidMount(){
+ componentDidMount(){
+this.props.load();
 }
 
   render(){
@@ -39,14 +36,15 @@ async componentDidMount(){
 const mapStateToProps = ({clients, talents}) => ({clients, talents});
 
 const mapDispatchToProps = (dispatch) => { 
-  return {
-    loadClients: () => dispatch(loadClients()),
-    loadTalents: () => dispatch(loadTalents()),
-    loadClientTalent: () => dispatch(loadClientTalent()),
-    // load: async()=> {
-    // dispatch(loadTalents(Talents));
-    // dispatch(loadClients(Clients));
+  return{
+    // loadClients: () => dispatch(loadClients()),
+    // loadTalents: () => dispatch(loadTalents()),
+    // loadClientTalent: () => dispatch(loadClientTalent()),
+    load: async()=> {
+    dispatch(loadTalents(Talents));
+    dispatch(loadClients(Clients));
     // dispatch(loadClientTalent(clientTalent));
+    }
   }
   };
 

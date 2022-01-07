@@ -1,6 +1,7 @@
 import {createStore, applyMiddleware, combineReducers} from 'redux';
 import axios from 'axios';
 import thunk from 'redux-thunk'
+
 const LOAD_CLIENTS = 'LOAD_CLIENTS';
 const LOAD_TALENTS = 'LOAD_TALENTS';
 const LOAD_CLIENT_TALENT = 'LOAD_CLIENT_TALENT';
@@ -20,7 +21,7 @@ const clientsReducer = ( state = [], action) =>{
 
 const talentsReducer = ( state = [], action) =>{
     if (action.type === LOAD_TALENTS){
-        state = action.Talents;
+        state = action.talents;
     }
     if (action.type === UPDATE_TALENT){
         state = action.Talents.map((talent) => talent.id === action.talent.id ? action.talent : talent
@@ -56,12 +57,12 @@ const store = createStore(reducer, applyMiddleware(thunk));
 
 //creators
 
-const _loadClients = (clients) => {type: LOAD_CLIENTS, clients};
-const _loadTalents = (talents) => {type: LOAD_TALENTS, talents};
-const _loadClientTalent = (clientTalent) =>{type: LOAD_CLIENT_TALENT, clientTalent};
-const _createClientTalent = (clientTalent) =>{type: CREATE, clientTalent};
-const _deleteClientTalent = (clientTalent) => {type: DELETE_CLIENT_TALENT, clientTalent}; 
-const _updateTalent= (talent) => {type: UPDATE, talent}
+const _loadClients = clients => ({type: LOAD_CLIENTS, clients});
+const _loadTalents = talents => ({type: LOAD_TALENTS, talents});
+const _loadClientTalent = clientTalent =>({type: LOAD_CLIENT_TALENT, clientTalent});
+const _createClientTalent = clientTalent =>({type: CREATE, clientTalent});
+const _deleteClientTalent = clientTalent => ({type: DELETE_CLIENT_TALENT, clientTalent}); 
+const _updateTalent= talent => ({type: UPDATE, talent})
 
 //thunks
 
