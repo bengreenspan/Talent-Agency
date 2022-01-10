@@ -31,10 +31,8 @@ return (
        
         <Link to={'/'}>back to home page</Link>
         </div>
-
 )
 }
-
 
 const mapDispatchToProps = (dispatch, {history}) => {
     return {
@@ -46,20 +44,6 @@ const mapDispatchToProps = (dispatch, {history}) => {
         },
     }
 }
-        //     dispatch(addTalent(talent, orsomething))},
-        // destroy: (talent)=> dispatch(deleteTalent(talent, history))
-
-// const mapStateToProps =(state, otherProps) => {
-//   const fish = state.fishes.find(fish => fish.id === otherProps.match.params.id*1) || {};
-//         return {
-//             fish
-//         };
-//     },
-//     (dispatch, {history})=> {
-//     return {
-       
-//     }
-//     }
 
 export default connect(state => state, mapDispatchToProps
     )(Client);

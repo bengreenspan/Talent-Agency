@@ -8,11 +8,11 @@ class Talent extends React.Component {
     constructor(props) {
         super(props) 
         this.state = {
-          talent: '',
-          clients: []
+          name: ''
+          // clients: this.props.talent.clients
         };
-        // this.onChange = this.onChange.bind(this);
-        // this.onSave = this.onSave.bind(this)
+        this.onChange = this.onChange.bind(this);
+        this.onSave = this.onSave.bind(this)
       }
 
 
@@ -24,9 +24,10 @@ class Talent extends React.Component {
 //       });
 //   }
 
-  async onSubmit(ev){
-    const { talent, clients } = this.state;
-    await this.props.updateTalent({id: this.props.talent.id, name: talent, clients});
+  onSave(ev){
+    console.log(this.state)
+    // const { talent, clients } = this.state;
+    // await this.props.updateTalent({id: this.props.talent.id, name: talent, clients});
 }
 
 onChange(ev){
@@ -36,21 +37,20 @@ onChange(ev){
 }
 
 render (){
+  const { name } = this.state;
+  const { onChange, onSave } = this;
     return(
-        <div> <h1>{Talent.name}</h1>
+        <div> 
+          
+          {/* <h1>{(this.props.talent)}</h1> */}
 
-        <form  onSubmit={this.onSubmit}>
-            <input 
-            value={Talent.name} 
-            onChange={this.onChange}/>
-            <button type='submit' disabled={!Talent.name || Talent.name === Talent.name}
+        <form onSubmit={ onSave}>
+            <input name='name' value={name} onChange={onChange}/>
+            <button>Update</button>
+           {/* // type='submit' disabled={!Talent.name || Talent.name === Talent.name} */}
            
-            >Update</button>
+            
         </form>
-
-    
-       
-           
        <Link to={'/'}>Cancel</Link>
         </div>
     )
@@ -71,5 +71,8 @@ const mapDispatchToProps = (dispatch, { history }) => {
     }
   }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Talent);
+export default 
+connect(mapStateToProps, mapDispatchToProps)(
+  Talent
+  );
 
